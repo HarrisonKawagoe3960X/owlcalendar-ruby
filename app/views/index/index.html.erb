@@ -129,6 +129,7 @@
             <% if day == 23 && @currentmonth == 11 %>
             <div style="background-color:green;border-radius:10px;"><p style="color:white;text-decoration:none !important; ">勤労感謝の日</p></div>
             <% end %>
+            <% if session[:schedule]!= nil %>
             <% session[:schedule].each do |index| %>
     
               <% schedule = Schedule.find_by(id: index.to_i) %>
@@ -142,6 +143,7 @@
               <% end %>
              
               
+            <% end %>
             <% end %>
             <% day+=1 %>
             </div>
