@@ -55,11 +55,11 @@
     
     <% schedule = Schedule.find_by(id: index.to_i) %>
     <div class="button7"><p align="center">
-    <%= schedule.time.to_s[0,4] %>年
-    <%= schedule.time.to_s[4,2] %>月
-    <%= schedule.time.to_s[6,2] %>日
-    <%= schedule.time.to_s[8,2] %>時
-    <%= schedule.time.to_s[10,2] %>分</p>
+    <%= schedule.timedata.to_s[0,4] %>年
+    <%= schedule.timedata.to_s[4,2] %>月
+    <%= schedule.timedata.to_s[6,2] %>日
+    <%= schedule.timedata.to_s[8,2] %>時
+    <%= schedule.timedata.to_s[10,2] %>分</p>
     </div>
     <div class="button9">
     <p align="center">

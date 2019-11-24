@@ -10,6 +10,7 @@ class NewscheduleController < ApplicationController
   minute = params[:minute]
   content = params[:content]
   temp = year.to_s
+  timenum = year.to_i * 1000+ month.to_i*100  + day.to_i *10 +hour.to_i  +minute.to_i * 0.1
   if month.to_i <10
     temp+="0"
   end
@@ -26,7 +27,7 @@ class NewscheduleController < ApplicationController
     temp+="0"
   end
   temp += minute.to_s
-  schedule = Schedule.new(content:content,time:temp.to_i,userid:session[:userid])
+  schedule = Schedule.new(content:content,time:timenum,userid:session[:userid],timedata:temp)
   schedule.save
   Schedule.order(:time)
   session[:schedule] = []

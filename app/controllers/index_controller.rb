@@ -66,8 +66,8 @@ class IndexController < ApplicationController
     def logout
         session[:userid] = nil
         session[:username] = nil
-        session[:schedules] = []
-        redirect_to :action => 'index'
+        session[:schedules] = nil
+        redirect_to controller:'index',:action => 'index'
 
     end
 end

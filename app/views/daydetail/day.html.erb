@@ -57,10 +57,10 @@
     
     <% schedule = Schedule.find_by(id: index.to_i) %>
     
-    <% if schedule.time.to_s[0,4].to_i == @currentyear.to_i&&schedule.time.to_s[4,2].to_i == @currentmonth.to_i&&schedule.time.to_s[6,2].to_i == @currentday.to_i&&schedule.time.to_s[8,2].to_i == i  %>
+    <% if schedule.timedata.to_s[0,4].to_i == @currentyear.to_i&&schedule.timedata.to_s[4,2].to_i == @currentmonth.to_i&&schedule.timedata.to_s[6,2].to_i == @currentday.to_i&&schedule.timedata.to_s[8,2].to_i == i &&session[:userid] == schedule.userid   %>
     <div style="background-color:cyan;color:black;border-radius:30px;font-size:45px">
     <p align="center">
-    <%= schedule.time.to_s[8,2] %>:<%= schedule.time.to_s[10,2] %>
+    <%= schedule.timedata.to_s[8,2] %>:<%= schedule.timedata.to_s[10,2] %>
     <%= schedule.content %></p></div>
     <% end %>
 
