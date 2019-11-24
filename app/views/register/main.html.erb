@@ -1,0 +1,38 @@
+<html lang="ja">
+<head>
+                <meta charset="utf-8">
+                <title>Main</title>
+                <%= stylesheet_link_tag "stylesheet" %>
+                <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+                <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+
+<div class="header">
+
+<div class="datetitle" style="color:white;">新規登録</div>
+
+
+
+
+
+
+</div>
+
+<%= form_tag({:controller => 'register', :action => 'register'}) do %>
+<p class="bittitle" align="center" style="font-size:60px;margin-top:20px">Register</p>
+<br>
+<% if @error != nil%>
+<div class="datetitle" style="color:white;"><p align="center"><%=@error%></p></div>
+<% end %>
+<br>
+<input class="inputtitle" type="text" name="username" placeholder="Username"></input>
+<br>
+<input class="inputtitle" type="text" name="email" placeholder="Email"></input>
+<br>
+<input class="inputtitle" type="password" name="password" placeholder="Password"></input>
+<br>
+
+    <button class="button1">新規登録</button><br>
+    <%end%>

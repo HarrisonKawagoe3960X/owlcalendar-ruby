@@ -1,0 +1,66 @@
+<html lang="ja">
+<head>
+                <meta charset="utf-8">
+                <title>OwlCalendar</title>
+                <%= stylesheet_link_tag "stylesheet" %>
+                <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+                <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+
+<div class="header">
+
+<div id="nav-drawer">
+      <input id="nav-input" type="checkbox" class="nav-unshown">
+      <label id="nav-open" for="nav-input"><span></span></label>
+      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+      <div id="nav-content">
+      <% if session[:userid] == nil %>
+      <%= link_to({:controller => :login, :action => :main,})  do %>
+      <p align="center" style="color:black;font-size:30px;margin-top:40px">ログイン</p><br>
+      <%end%>
+      <%else%>
+      <p align="center" style="color:black;font-size:30px;margin-top:40px">ようこそ！<%=session[:username]%></p><br>
+      <%= link_to({:controller => :mypage, :action => :index,})  do %>
+      <p align="center" style="color:black;font-size:30px;">マイページ</p><br>
+      <%end%>
+      <%= link_to({:controller => :index, :action => :index,})  do %>
+        <p align="center" style="color:black;font-size:30px;">カレンダー</p><br>
+        <%end%>
+      <%= link_to({:controller => :schedules, :action => :main,})  do %>
+      <p align="center" style="color:black;font-size:30px">予定</p><br>
+      <%end%>
+      <%= link_to({:controller => :index, :action => :logout,})  do %>
+      <p align="center" style="color:black;font-size:30px;">ログアウト</p><br>
+      <%end%>
+      
+      <%end%>
+      
+      <p align="center" style="color:black;font-size:30px">OwlCalendar</p>
+      </div>
+      
+  </div>
+
+  <div class="datetitle" style="color:white">マイページ</div>
+
+ 
+  </ul>
+  </div>
+
+  <%= form_tag({:controller => 'mypage', :action => 'update'}) do %>
+    <p class="bittitle" align="center" style="font-size:60px;margin-top:20px">ユーザー情報の変更</p>
+    <br>
+    <% if @error != nil%>
+    <div class="datetitle" style="color:white;"><p align="center"><%=@error%></p></div>
+    <% end %>
+    <br>
+    <input class="inputtitle" type="text" name="username" value=<%=User.all[session[:userid]-1].name %>></input>
+    <br>
+    <input class="inputtitle" type="text" name="email" value=<%=User.all[session[:userid]-1].email %>></input>
+    <br>
+    <input class="inputtitle" type="password" name="password" value=<%=User.all[session[:userid]-1].password %>></input>
+    <br>
+    
+        <button class="button1">情報更新</button><br>
+        <%end%>

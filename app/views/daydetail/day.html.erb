@@ -1,0 +1,71 @@
+<html lang="ja">
+<head>
+                <meta charset="utf-8">
+                <title>OwlCalendar</title>
+                <%= stylesheet_link_tag "stylesheet" %>
+                <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+                <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+
+<div class="header">
+
+<div id="nav-drawer">
+      <input id="nav-input" type="checkbox" class="nav-unshown">
+      <label id="nav-open" for="nav-input"><span></span></label>
+      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+      <div id="nav-content">
+      <% if session[:userid] == nil %>
+      <%= link_to({:controller => :login, :action => :main,})  do %>
+      <p align="center" style="color:black;font-size:30px;margin-top:40px">ログイン</p><br>
+      <%end%>
+      <%else%>
+      <p align="center" style="color:black;font-size:30px;margin-top:40px">ようこそ！<%=session[:username]%></p><br>
+      <%= link_to({:controller => :mypage, :action => :index,})  do %>
+      <p align="center" style="color:black;font-size:30px;">マイページ</p><br>
+      <%end%>
+      <%= link_to({:controller => :index, :action => :index,})  do %>
+        <p align="center" style="color:black;font-size:30px;">カレンダー</p><br>
+        <%end%>
+      <%= link_to({:controller => :schedules, :action => :main,})  do %>
+      <p align="center" style="color:black;font-size:30px">予定</p><br>
+      <%end%>
+      <%= link_to({:controller => :index, :action => :logout,})  do %>
+      <p align="center" style="color:black;font-size:30px;">ログアウト</p><br>
+      <%end%>
+      
+      <%end%>
+      
+      <p align="center" style="color:black;font-size:30px">OwlCalendar</p>
+      </div>
+      
+  </div>
+
+  <div class="datetitle" style="color:white"><%=@title %></div>
+
+ 
+  </ul>
+  </div>
+  <% @festivals.each do |festival| %>
+    <p align="center" style="background-color:green;border-radius:10px;color:white;font-size:30px"><%=festival %></p>
+  <% end %>
+  <% i = 0 %>
+  <% while i < 25 %>
+  <p align="center" style="background-color:white;border-radius:10px;color:black;font-size:30px"><%=i %>:00</p>
+  <% session[:schedule].each do |index| %>
+    
+    <% schedule = Schedule.find_by(id: index.to_i) %>
+    
+    <% if schedule.time.to_s[0,4].to_i == @currentyear.to_i&&schedule.time.to_s[4,2].to_i == @currentmonth.to_i&&schedule.time.to_s[6,2].to_i == @currentday.to_i&&schedule.time.to_s[8,2].to_i == i  %>
+    <div style="background-color:cyan;color:black;border-radius:30px;font-size:45px">
+    <p align="center">
+    <%= schedule.time.to_s[8,2] %>:<%= schedule.time.to_s[10,2] %>
+    <%= schedule.content %></p></div>
+    <% end %>
+
+    
+    
+  <% end %>
+  <% i += 1 %>
+  <% end %>

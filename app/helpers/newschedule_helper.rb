@@ -1,0 +1,2 @@
+module NewscheduleHelper
+end

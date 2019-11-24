@@ -1,0 +1,91 @@
+<html lang="ja">
+<head>
+                <meta charset="utf-8">
+                <title>Main</title>
+                <%= stylesheet_link_tag "stylesheet" %>
+                <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+                <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+
+<div class="header">
+
+<div id="nav-drawer">
+      <input id="nav-input" type="checkbox" class="nav-unshown">
+      <label id="nav-open" for="nav-input"><span></span></label>
+      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+      <div id="nav-content">
+      <p class="bigtitle">Username</p><br>
+      <p class="bigtitle">Schedule</p><br>
+      <p class="bigtitle">OwlCalendar</p>
+      </div>
+      
+  </div>
+
+  <div class="datetitle"><%=@title %></div>
+
+  <%= button_to "<",{controller:'index',:action =>'back',} %>
+  <%= button_to ">",{controller:'index',:action =>'forward',} %>
+ 
+  </ul>
+  </div>
+  
+  
+
+  
+  
+  
+</div>
+  
+  
+
+
+<div class = "row">
+<div class="col">
+    <div class="youbi" style="color:red;">日</div>
+  </div>
+  <div class="col">
+  <div class="youbi">日</div>
+</div>
+<div class="col">
+    <div class="youbi">日</div>
+  </div>
+  <div class="col">
+    <div class="youbi">日</div>
+  </div>
+  <div class="col">
+    <div class="youbi">日</div>
+  </div>
+  <div class="col">
+    <div class="youbi">日</div>
+  </div>
+  <div class="col" style="color:cyan;">
+    <div class="youbi">日</div>
+  </div>
+</div>
+
+<div class="row">
+<% i = 0 %>
+<% day = 1 %>
+<% loop do%>
+        <div class="col">
+
+        <%= link_to "<",{controller:'index',:action =>'back',} do %>
+          <div class="num" style="text-decoration:none !important; ">
+          <% if i >= @yb && day <= @daymax %>
+            <% if @currentyear == @todayyear && @currentmonth == @todaymonth && day == @todayday %>
+            <div style="background-color:blue;border-radius:10px;"><p style="color:white;text-decoration:none !important; "><%= day%></p></div>
+            <% else %>
+            <p style="text-decoration:none !important;color:black; "><%= day%></p>
+            <%end%>
+            <% day+=1 %>
+          <% end %>
+          </div>
+          <% end %>
+          </div>
+          <% break if i==34 %>
+        <% i+=1 %>
+        <% end %>
+       
+</div>

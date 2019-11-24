@@ -1,0 +1,72 @@
+<html lang="ja">
+<head>
+                <meta charset="utf-8">
+                <title>OwlCalendar</title>
+                <%= stylesheet_link_tag "stylesheet" %>
+                <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+                <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+
+<div class="header">
+
+<div id="nav-drawer">
+      <input id="nav-input" type="checkbox" class="nav-unshown">
+      <label id="nav-open" for="nav-input"><span></span></label>
+      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+      <div id="nav-content">
+      <% if session[:userid] == nil %>
+      <%= link_to({:controller => :login, :action => :main,})  do %>
+      <p align="center" style="color:black;font-size:30px;margin-top:40px">ログイン</p><br>
+      <%end%>
+      <%else%>
+      <p align="center" style="color:black;font-size:30px;margin-top:40px">ようこそ！<%=session[:username]%></p><br>
+      <%= link_to({:controller => :mypage, :action => :index,})  do %>
+      <p align="center" style="color:black;font-size:30px;">マイページ</p><br>
+      <%end%>
+      <%= link_to({:controller => :index, :action => :index,})  do %>
+        <p align="center" style="color:black;font-size:30px;">カレンダー</p><br>
+        <%end%>
+      <%= link_to({:controller => :schedules, :action => :main,})  do %>
+      <p align="center" style="color:black;font-size:30px">予定</p><br>
+      <%end%>
+      <%= link_to({:controller => :index, :action => :logout,})  do %>
+      <p align="center" style="color:black;font-size:30px;">ログアウト</p><br>
+      <%end%>
+      
+      <%end%>
+      
+      <p align="center" style="color:black;font-size:30px">OwlCalendar</p>
+      </div>
+      
+  </div>
+
+  <div class="datetitle" style="color:white">予定リスト</div>
+
+
+ 
+  </ul>
+  </div>
+  <%= link_to({:controller => :newschedule, :action => :index,})  do %>
+    <button class="button2">+ 予定の作成</button><br>
+    <%end%>
+  <% session[:schedule].each do |index| %>
+    
+    <% schedule = Schedule.find_by(id: index.to_i) %>
+    <div class="button7"><p align="center">
+    <%= schedule.time.to_s[0,4] %>年
+    <%= schedule.time.to_s[4,2] %>月
+    <%= schedule.time.to_s[6,2] %>日
+    <%= schedule.time.to_s[8,2] %>時
+    <%= schedule.time.to_s[10,2] %>分</p>
+    </div>
+    <div class="button9">
+    <p align="center">
+    <%= schedule.content %></p>
+    </div>
+    <%= link_to({:controller => :schedules, :action => :delete, deleteindex:index})  do %>
+      <button class="button10" name="deleteindex" value="index.to_i">削除</button><br>
+      <%end%>
+    
+  <% end %>

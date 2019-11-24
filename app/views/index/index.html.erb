@@ -1,0 +1,157 @@
+<html lang="ja">
+<head>
+                <meta charset="utf-8">
+                <title>Main</title>
+                <%= stylesheet_link_tag "stylesheet" %>
+                <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+                <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+
+<div class="header">
+
+<div id="nav-drawer">
+      <input id="nav-input" type="checkbox" class="nav-unshown">
+      <label id="nav-open" for="nav-input"><span></span></label>
+      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+      <div id="nav-content">
+      <% if @userid == nil %>
+      <%= link_to({:controller => :login, :action => :main,})  do %>
+      <p align="center" style="color:black;font-size:30px;margin-top:40px">ログイン</p><br>
+      <%end%>
+      <%else%>
+      <p align="center" style="color:black;font-size:30px;margin-top:40px">ようこそ！<%=session[:username]%></p><br>
+      <%= link_to({:controller => :mypage, :action => :index,})  do %>
+        <p align="center" style="color:black;font-size:30px;">マイページ</p><br>
+        <%end%>
+      <%= link_to({:controller => :index, :action => :index,})  do %>
+        <p align="center" style="color:black;font-size:30px;">カレンダー</p><br>
+        <%end%>
+        <%= link_to({:controller => :schedules, :action => :main,})  do %>
+          <p align="center" style="color:black;font-size:30px">予定</p><br>
+          <%end%>
+      <%= link_to({:controller => :index, :action => :logout,})  do %>
+      <p align="center" style="color:black;font-size:30px;">ログアウト</p><br>
+      <%end%>
+      
+      <%end%>
+      
+      <p align="center" style="color:black;font-size:30px">OwlCalendar</p>
+      </div>
+      
+  </div>
+
+  <div class="datetitle"><p style="color:white;"><%=@title %></p></div>
+
+  <%= button_to "<",{controller:'index',:action =>'back'},{style:"margin-left:15px;font-size:50px;background-color:Transparent;border:none;color:white;"}%>
+  <%= button_to ">",{controller:'index',:action =>'forward'},{style:"margin-left:15px;font-size:50px;background-color:Transparent;border:none;color:white;"}%>
+ 
+  </ul>
+  </div>
+  
+  
+
+  
+</div>
+  
+  
+
+
+<div class = "row">
+<div class="col">
+    <div class="youbi" style="color:red;">日</div>
+  </div>
+  <div class="col">
+  <div class="youbi">月</div>
+</div>
+<div class="col">
+    <div class="youbi">火</div>
+  </div>
+  <div class="col">
+    <div class="youbi">水</div>
+  </div>
+  <div class="col">
+    <div class="youbi">木</div>
+  </div>
+  <div class="col">
+    <div class="youbi">金</div>
+  </div>
+  <div class="col" style="color:cyan;">
+    <div class="youbi">土</div>
+  </div>
+</div>
+
+<div class="row">
+<% i = 0 %>
+<% day = 1 %>
+<% loop do%>
+        <div class="col">
+
+        
+          <div class="num" style="text-decoration:none !important; ">
+          <% if i >= @yb && day <= @daymax %>
+          
+          <%= link_to({:action => :seeday,:day => day},method: :post)  do %>
+          <div>
+            <% if @currentyear == @todayyear && @currentmonth == @todaymonth && day == @todayday %>
+            <div style="background-color:blue;border-radius:10px;"><p style="color:white;text-decoration:none !important; "><%= day%></p></div>
+            <% else %>
+            <p style="text-decoration:none !important;color:black; "><%= day%></p>
+            <%end%>
+            <% if day == 1 && @currentmonth == 1 %>
+            <div style="background-color:green;border-radius:10px;"><p style="color:white;text-decoration:none !important; ">元日</p></div>
+            <% end %>
+            <% if day == 11 && @currentmonth == 2 %>
+            <div style="background-color:green;border-radius:10px;"><p style="color:white;text-decoration:none !important; ">建国記念の日</p></div>
+            <% end %>
+            <% if day == 23 && @currentmonth == 2 %>
+            <div style="background-color:green;border-radius:10px;"><p style="color:white;text-decoration:none !important; ">天皇誕生日</p></div>
+            <% end %>
+            <% if day == 29 && @currentmonth == 4 %>
+            <div style="background-color:green;border-radius:10px;"><p style="color:white;text-decoration:none !important; ">昭和の日</p></div>
+            <% end %>
+            <% if day == 3 && @currentmonth == 5 %>
+            <div style="background-color:green;border-radius:10px;"><p style="color:white;text-decoration:none !important; ">憲法記念日</p></div>
+            <% end %>
+            <% if day == 4 && @currentmonth == 5 %>
+            <div style="background-color:green;border-radius:10px;"><p style="color:white;text-decoration:none !important; ">みどりの日</p></div>
+            <% end %>
+            <% if day == 5 && @currentmonth == 5 %>
+            <div style="background-color:green;border-radius:10px;"><p style="color:white;text-decoration:none !important; ">こどもの日</p></div>
+            <% end %>
+            <% if day == 11 && @currentmonth == 8 %>
+            <div style="background-color:green;border-radius:10px;"><p style="color:white;text-decoration:none !important; ">山の日</p></div>
+            <% end %>
+            <% if day == 3 && @currentmonth == 11 %>
+            <div style="background-color:green;border-radius:10px;"><p style="color:white;text-decoration:none !important; ">文化の日</p></div>
+            <% end %>
+            <% if day == 23 && @currentmonth == 11 %>
+            <div style="background-color:green;border-radius:10px;"><p style="color:white;text-decoration:none !important; ">勤労感謝の日</p></div>
+            <% end %>
+            <% session[:schedule].each do |index| %>
+    
+              <% schedule = Schedule.find_by(id: index.to_i) %>
+              
+              <% if schedule.time.to_s[0,4].to_i == @currentyear&&schedule.time.to_s[4,2].to_i == @currentmonth&&schedule.time.to_s[6,2].to_i == day  %>
+              <div style="background-color:cyan;border-radius:10px">
+              <p style="color:black;text-decoration:none !important; ">
+              <%= schedule.content.truncate(7) %>
+              </p>
+              </div>
+              <% end %>
+             
+              
+            <% end %>
+            <% day+=1 %>
+            </div>
+            <%end%>
+          <% end %>
+          </div>
+          
+          </div>
+          <% break if i==34 %>
+        <% i+=1 %>
+        <% end %>
+       
+</div>
