@@ -17,6 +17,17 @@ class IndexController < ApplicationController
         @todayday = $todayday
         @todayyear = $todayyear
         @todaymonth = $todaymonth
+
+        if session[:userid] != nil
+            session[:schedule] = []
+                schedules = Schedule.all.order(:time)
+                schedules.each do |schedule2|
+                  if schedule2.userid == session[:userid]
+                    session[:schedule].push(schedule2.id)
+                  end
+                  
+                end
+          end
         
         e = Date.new(@currentyear,@currentmonth,1)
         @yb = e.wday

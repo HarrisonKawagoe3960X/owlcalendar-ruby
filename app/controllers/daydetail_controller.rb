@@ -5,6 +5,17 @@ class DaydetailController < ApplicationController
     @currentmonth = params[:detailmonth]
     @currentyear = params[:detailyear]
     @currentday = params[:detailday]
+    if session[:userid] != nil
+      session[:schedule] = []
+          schedules = Schedule.all.order(:time)
+          schedules.each do |schedule2|
+            if schedule2.userid == session[:userid]
+              session[:schedule].push(schedule2.id)
+            end
+            
+          end
+    end
+
     @title = @currentyear.to_s+"年"+@currentmonth.to_s+"月"+@currentday.to_s+"日"
     if @currentday.to_i == 1 && @currentmonth.to_i == 1
         @festivals.push("元日")
