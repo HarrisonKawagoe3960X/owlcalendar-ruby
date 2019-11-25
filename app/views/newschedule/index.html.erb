@@ -47,7 +47,11 @@
 
   <p class="bittitle" style="font-size:60px;margin-top:20px;margin-left:50px;color:black;">時間:</p>
   <%= form_tag({:controller => 'newschedule', :action => 'newschedule'}) do %>
-  <div class="scheduletime" align="center"><input class="inputtime" name="year">年<input class="inputtime" name="month">月<input class="inputtime" name="day">日<input class="inputtime" name="hour">時<input class="inputtime" name="minute">分</div>
+    <div class="scheduletime" align="center" ><input class="inputtime" name="year" maxlength='4' align="center">年</div><br>
+    <div class="scheduletime" align="center" ><input class="inputtime" name="month"  maxlength='2' align="center">月</div><br>
+    <div class="scheduletime" align="center" ><input class="inputtime" name="day"  maxlength='2' align="center">日</div><br>
+    <div class="scheduletime" align="center" ><input class="inputtime" name="hour"  maxlength='2'align="center">時</div><br>
+    <div class="scheduletime" align="center" ><input class="inputtime" name="minute"  maxlength='2' align="center">分</div>
   <p class="bittitle" style="font-size:60px;margin-top:20px;margin-left:50px;color:black;">予定内容:</p>
   <textarea name="content" rows="8"></textarea>
   <br>

@@ -135,8 +135,8 @@ body {
   .scheduletime{
     color: black;
     font-size: 30px;
-    display: flex;
     left: 50%;
+    text-align:center
     
   }
 
@@ -269,8 +269,8 @@ body {
     background-color: azure;
     border-radius:5em;
     text-align: center;
-    
-    width:40%;
+    left: 50%;
+    width:150px;
   }
 
 
