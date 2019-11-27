@@ -10,7 +10,8 @@ class LoginController < ApplicationController
     
     userdatas.each do |userdata|
       if userdata.name == username
-        if userdata.password == password
+        userobject = User.find(userdata.id.to_i)
+        if userobject.authenticate(password)
           session[:username] = userdata.name
           session[:userid] = userdata.id
           session[:schedule] = []

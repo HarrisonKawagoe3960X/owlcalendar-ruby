@@ -68,6 +68,7 @@ class IndexController < ApplicationController
     end
 
     def seeday
+        
         params[:detailday] = params[:day]
         params[:detailmonth] = $currentmonth
         params[:detailyear] = $currentyear

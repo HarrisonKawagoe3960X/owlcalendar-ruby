@@ -5,7 +5,7 @@ class RegisterController < ApplicationController
 
   def register 
     
-    user = User.new(name:params[:username],password:params[:password],email:params[:email])
+    user = User.new(name:params[:username],password:params[:password],password_confirmation:params[:password],email:params[:email])
     if user.valid?
       user.save
       redirect_to controller:'login',action:'main' and return
