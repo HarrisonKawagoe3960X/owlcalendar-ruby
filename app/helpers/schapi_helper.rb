@@ -1,0 +1,2 @@
+module SchapiHelper
+end
